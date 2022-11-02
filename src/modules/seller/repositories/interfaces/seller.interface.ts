@@ -1,7 +1,8 @@
-import { ISellerSerializer } from "../../serializers/seller.serializer"
+import { ISellerSerializer, ITopSellerSerializer } from "../../serializers/seller.serializer"
 
 
 interface ISellerRepository {
+  getTopsellers(): Promise<ITopSellerSerializer[]>
   get(): Promise<ISellerSerializer[]>
 }
 

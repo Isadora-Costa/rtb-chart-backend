@@ -1,17 +1,17 @@
 import { inject, injectable } from "tsyringe";
 import { ISellerRepository } from "../repositories/interfaces/seller.interface";
-import { ISellerSerializer } from "../serializers/seller.serializer";
+import { ITopSellerSerializer } from "../serializers/seller.serializer";
 
 @injectable()
-class SellerService {
+class TopSellerService {
   constructor(
     @inject("SellerRepository")
     private sellerRepository: ISellerRepository
   ) {}
 
-  async execute(): Promise<ISellerSerializer[]> {
-    return await this.sellerRepository.get();
+  async execute(): Promise<ITopSellerSerializer[]> {
+    return await this.sellerRepository.getTopsellers();
   }
 }
 
-export { SellerService }
+export { TopSellerService }

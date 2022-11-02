@@ -11,8 +11,16 @@
   ],
   "tags": [
     {
+      "name": "country",
+      "description": "Country Endpoints",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost"
+      }
+    },
+    {
       "name": "seller",
-      "description": "seller Endpoints",
+      "description": "Seller Endpoints",
       "externalDocs": {
         "description": "Find out more",
         "url": "http://localhost"
@@ -28,7 +36,57 @@
     }
   ],
   "paths": {
+    "/country": {
+      "get": {
+        "tags": [
+          "country"
+        ],
+        "summary": "Get all countries",
+        "description": "Retrieve all countries",
+        "operationId": "getCountries",
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CountrySerializer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/seller": {
+      "get": {
+        "tags": [
+          "seller"
+        ],
+        "summary": "Get all sellers",
+        "description": "Retrieve all sellers",
+        "operationId": "getSellers",
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SellerSerializer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seller/top-seller": {
       "get": {
         "tags": [
           "seller"
@@ -44,7 +102,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SellerSerializer"
+                    "$ref": "#/components/schemas/TopSellerSerializer"
                   }
                 }
               }
@@ -115,6 +173,20 @@
   },
   "components": {
     "schemas": {
+      "CountrySerializer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+          },
+          "name": {
+            "type": "string",
+            "example": "BRA"
+          }
+        }
+      },
       "SellerSerializer": {
         "type": "object",
         "properties": {
@@ -123,7 +195,21 @@
             "format": "uuid",
             "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
           },
-          "sellerName": {
+          "name": {
+            "type": "string",
+            "example": "Seller #01"
+          }
+        }
+      },
+      "TopSellerSerializer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+          },
+          "name": {
             "type": "string",
             "example": "Seller #01"
           },

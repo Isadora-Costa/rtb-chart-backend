@@ -3,7 +3,7 @@ import { AppDataSource } from "../../../../database/data-source";
 import { SellerEntity } from "../../../../database/entities/seller.entity";
 import { NotFoundError } from "../../../../errors/implementations/not-found.error";
 import { ISellerRepository } from "../interfaces/seller.interface";
-import { ISellerSerializer } from "../../serializers/seller.serializer";
+import { ISellerSerializer, ITopSellerSerializer } from "../../serializers/seller.serializer";
 
 class SellerRepository implements ISellerRepository {
   private sellerRepoditory: Repository<SellerEntity>
@@ -14,6 +14,22 @@ class SellerRepository implements ISellerRepository {
 
   async get(): Promise<ISellerSerializer[]> {
     const dataRecords: ISellerSerializer[] = []
+    const sellers = await this.sellerRepoditory.find()
+
+    if (sellers.length == 0) throw new NotFoundError("Seller table empty!")
+
+    for (const seller of sellers) {
+      dataRecords.push({
+        id: seller.id,
+        name: seller.name
+      })
+    }
+
+    return dataRecords
+  }
+
+  async getTopsellers(): Promise<ITopSellerSerializer[]> {
+    const dataRecords: ITopSellerSerializer[] = []
     const query = `
       SELECT
         s.id as id,
@@ -29,7 +45,7 @@ class SellerRepository implements ISellerRepository {
 
     const topSellers = await this.sellerRepoditory.query(query)
 
-    if (topSellers.length == 0) throw new NotFoundError("Table empty!")
+    if (topSellers.length == 0) throw new NotFoundError("Seller table empty!")
 
     for (const seller of topSellers) {
       dataRecords.push({
