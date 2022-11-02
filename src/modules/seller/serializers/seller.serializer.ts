@@ -1,7 +1,7 @@
 interface ITopSellerSerializer {
   id: string,
   name: string,
-  totalSaller: string
+  totalSeller: string
 }
 
 interface ISellerSerializer {

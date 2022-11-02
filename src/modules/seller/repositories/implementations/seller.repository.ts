@@ -34,12 +34,12 @@ class SellerRepository implements ISellerRepository {
       SELECT
         s.id as id,
         s.name as name,
-        SUM(o.price) as totalSaller
+        SUM(o.price) as totalSeller
       FROM
         "order" o
       LEFT JOIN seller s on s.id = o.sellerId
       GROUP  BY s.name
-      ORDER BY totalSaller DESC
+      ORDER BY totalSeller DESC
       LIMIT 3
     `
 
@@ -51,7 +51,7 @@ class SellerRepository implements ISellerRepository {
       dataRecords.push({
         id: seller.id,
         name: seller.name,
-        totalSaller: new Intl.NumberFormat('en-us', {minimumFractionDigits: 2}).format(seller.totalSaller)
+        totalSeller: new Intl.NumberFormat('en-us', {minimumFractionDigits: 2}).format(seller.totalSeller)
       })
     }
 

@@ -15,7 +15,7 @@
       "description": "Country Endpoints",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://localhost"
+        "url": "https://github.com/Isadora-Costa/rtb-chart-backend#readme"
       }
     },
     {
@@ -23,7 +23,7 @@
       "description": "Seller Endpoints",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://localhost"
+        "url": "https://github.com/Isadora-Costa/rtb-chart-backend#readme"
       }
     },
     {
@@ -31,7 +31,7 @@
       "description": "Order Endpoints",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://localhost"
+        "url": "https://github.com/Isadora-Costa/rtb-chart-backend#readme"
       }
     }
   ],
