@@ -10,8 +10,6 @@ import openapi from "./docs/swagger.json"
 import dotenv  from 'dotenv'
 import cors from 'cors'
 
-dotenv.config({ path: '/opt/rtb/src/shared/environment/.env' })
-
 AppDataSource.initialize().then(() => {
   console.log("Data Source has been initialized!")
 }).catch((err) => {
