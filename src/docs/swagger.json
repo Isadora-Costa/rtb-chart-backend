@@ -1,0 +1,207 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Rtb server API",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333"
+    }
+  ],
+  "tags": [
+    {
+      "name": "seller",
+      "description": "seller Endpoints",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost"
+      }
+    },
+    {
+      "name": "order",
+      "description": "Order Endpoints",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://localhost"
+      }
+    }
+  ],
+  "paths": {
+    "/seller": {
+      "get": {
+        "tags": [
+          "seller"
+        ],
+        "summary": "Get top 3 sellers",
+        "description": "Retrieve top 3 sellers",
+        "operationId": "getTopSellers",
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SellerSerializer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order": {
+      "get": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Get all orders",
+        "description": "Retrive all orders",
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "name": "seller",
+            "in": "query",
+            "description": "Seller to filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "country to filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Before Cursor",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "After Cursor",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "records per pages",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderSerializer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SellerSerializer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+          },
+          "sellerName": {
+            "type": "string",
+            "example": "Seller #01"
+          },
+          "totalSeller": {
+            "type": "string",
+            "format": "number",
+            "example": "100.000,00"
+          }
+        }
+      },
+      "OrderSerializer": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+                },
+                "producuct": {
+                  "type": "string",
+                  "example": "Laptop #01"
+                },
+                "sellerId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+                },
+                "sellerName": {
+                  "type": "string",
+                  "example": "Seller #01"
+                },
+                "countryId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "b70d5f2a-b774-4416-ba68-51b506ce5298"
+                },
+                "countryName": {
+                  "type": "string",
+                  "example": "BRA"
+                }
+              }
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "afterCursor": {
+                "type": "string",
+                "example": "cHJvZHVjdDpQcm9kdWN0JTIwMDQ="
+              },
+              "beforeCursor": {
+                "type": "string",
+                "example": null
+              },
+              "count": {
+                "type": "number",
+                "example": 3
+              },
+              "limit": {
+                "type": "number",
+                "example": 4
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  rtbserver:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: www
+    domainname: rtb.com
+    container_name: rtb
+    tty: true
+    restart: always
+    ports:
+      - 3333:3333
+      - 9229:9229
+    volumes:
+      - ./:/opt/rtb:rw
+    command: ["npm", "run", "remote"]
